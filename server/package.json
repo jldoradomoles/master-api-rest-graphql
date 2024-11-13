@@ -1,14 +1,34 @@
 {
-  "name": "character-api",
+  "name": "graphql-apollo-back",
   "version": "1.0.0",
-  "description": "Character API",
   "main": "index.js",
   "scripts": {
-    "mock-server": "json-server --routes ./config/routes.json --watch mock-data/characters-data.json --middlewares ./config/character.middleware.js --no-delete-cascade"
+    "start": "run-p -l type-check:watch start:dev",
+    "start:dev": "nodemon --exec babel-node --extensions \".ts\" src/index.ts",
+    "build": "run-p -l type-check build:prod",
+    "build:prod": "npm run clean && babel src -d dist --extensions \".ts\"",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "clean": "rimraf dist"
   },
-  "author": "Lemoncode",
   "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.12",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.3.5"
+  },
   "dependencies": {
-    "json-server": "^0.16.1"
+    "apollo-server-express": "^3.13.0",
+    "express": "^4.17.1",
+    "graphql": "^16.9.0",
+    "regenerator-runtime": "^0.13.7"
   }
 }
