@@ -4,6 +4,6 @@ import { CharacterCollectionContainer } from 'pods/character-collection';
 
 export const CharacterCollectionScene = () => (
   <AppLayout>
-    <CharacterCollectionContainer />
+    <CharacterCollectionContainer page={0} name={''} />
   </AppLayout>
 );

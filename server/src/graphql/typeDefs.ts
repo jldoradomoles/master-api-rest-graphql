@@ -1,26 +1,43 @@
 import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   type Character {
-    id: string;
-    name: string;
-    status: string;
-    species: string;
-    type: string;
-    gender: string;
-    origin: Origin;
-    location: Origin;
-    image: string;
-    episode: string[];
-    url: string;
-    created: string;
-    sentences: string[];
+    id: String
+    name: String
+    status: String
+    species: String
+    type: String
+    gender: String
+    origin: Origin
+    location: Origin
+    image: String
+    episode: String
+    url: String
+    created: String
+    sentences: String
+  }
+
+  type Info {
+    count: Int
+    pages: Int
+    next: Int
+    prev: Int
+  }
+
+  type Characters {
+    info: Info
+    results: [Character]
+  }
+
+  input FilterCharacter {
+    name: String
+  }
+
+  type Query {
+    characters(page: Int, filter: FilterCharacter): Characters
   }
 
   type Origin {
-    name: string;
-    url: string;
-  }
-  type Query {
-    characters: [Character!]!
+    name: String
+    url: String
   }
 `;

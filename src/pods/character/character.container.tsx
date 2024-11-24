@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as api from './api';
 import { CharacterComponent } from './character.component';
-import { createEmptyHotel } from 'pods/hotel/hotel.vm';
 import { Character } from './api';
 import { mapCharacterFromApiToVm } from './character.mappers';
 
