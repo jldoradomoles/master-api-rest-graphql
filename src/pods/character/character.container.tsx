@@ -1,49 +1,42 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import * as api from './api';
+import { useParams } from 'react-router-dom';
 import { CharacterComponent } from './character.component';
-import { Character } from './api';
-import { mapCharacterFromApiToVm } from './character.mappers';
+import { useQuery, gql } from '@apollo/client';
+
+const GET_CHARACTER_BY_ID = gql`
+  query GetCharacterById($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      status
+      species
+      type
+      gender
+      image
+      origin {
+        name
+      }
+      location {
+        name
+      }
+    }
+  }
+`;
 
 export const CharacterContainer: React.FunctionComponent = (props) => {
-  const [character, setCharacter] = React.useState<Character>();
   // const [cities, setCities] = React.useState<Lookup[]>([]);
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+  const { loading, error, data } = useQuery(GET_CHARACTER_BY_ID, {
+    variables: { id },
+  });
 
-  // const handleLoadCityCollection = async () => {
-  //   const apiCities = await api.getCities();
-  //   setCities(apiCities);
-  // };
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  const handleLoadCharacter = async () => {
-    const apiCharacter = await api.getCharacter(id);
-    setCharacter(mapCharacterFromApiToVm(apiCharacter));
-  };
-
-  // handleLoadCharacter();
-
-
-  React.useEffect(() => {
-    if (id) {
-      handleLoadCharacter();
-    }
-  }, []);
-
-  const handleSave = async (character: Character) => {
-    const apiCharacter = mapCharacterFromApiToVm(character);
-    const success = await api.updateCharacterSentence(apiCharacter);
-    if (success) {
-      navigate(-1);
-    } else {
-      alert('Error on save character');
-    }
-  };
-
-
+  const character = data.character;
 
   return character ? (
-    <CharacterComponent character={character} onSave={handleSave} />
+    <CharacterComponent character={character} />
   ) : (
     <div>Loading...</div>
   );

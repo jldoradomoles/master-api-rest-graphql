@@ -7,6 +7,20 @@
     margin-right: 1rem !important;
 }
 
+.btn-next {
+    margin-right: 1rem !important;
+}
+
 .btn-container {
     margin-top: 1rem;
+}
+
+.search-input {
+    display: flex;
+    height: 40px;
+}
+
+.MuiInputBase-root {
+    height: 40px !important;
+    margin-right: 1rem !important;
 }

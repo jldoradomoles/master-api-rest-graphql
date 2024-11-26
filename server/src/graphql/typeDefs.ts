@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 export const typeDefs = gql`
   type Character {
-    id: String
+    id: ID!
     name: String
     status: String
     species: String
@@ -34,6 +34,7 @@ export const typeDefs = gql`
 
   type Query {
     characters(page: Int, filter: FilterCharacter): Characters
+    character(id: ID!): Character
   }
 
   type Origin {

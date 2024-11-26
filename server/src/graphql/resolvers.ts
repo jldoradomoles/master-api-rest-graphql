@@ -37,5 +37,32 @@ export const resolvers = {
 
       return response.data.data.characters;
     },
+
+    character: async (_: any, { id }: { id: string }) => {
+      const response = await axios.post(RICK_AND_MORTY_API_URL, {
+        query: `
+          query ($id: ID!) {
+            character(id: $id) {
+              id
+              name
+              status
+              species
+              type
+              gender
+              image
+               origin {
+                name
+              }
+              location {
+                name
+              }
+            }
+          }
+        `,
+        variables: { id },
+      });
+
+      return response.data.data.character;
+    },
   },
 };

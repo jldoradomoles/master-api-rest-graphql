@@ -13,12 +13,9 @@ export const CharecterCollectionComponent: React.FunctionComponent<Props> = (
   props
 ) => {
   const { characterCollection, onEdit } = props;
-  console.log(characterCollection);
-  
+ 
   return (
     <div className={classes.root}>
-      
-
       <ul className={classes.list}>
         {characterCollection.map((character) => (
           <li key={character.id}>

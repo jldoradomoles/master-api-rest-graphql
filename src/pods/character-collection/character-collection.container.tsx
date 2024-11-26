@@ -96,7 +96,7 @@ export const CharacterCollectionContainer = ({ page: initialPage, name: initialN
         <Button className='btn-prev' variant="contained" color="primary" onClick={() => handlePageChange('prev')}>
           Anterior
         </Button>
-        <Button className='btn' variant="contained" color="primary" onClick={() => handlePageChange('next')}>
+        <Button className='btn-next' variant="contained" color="primary" onClick={() => handlePageChange('next')}>
           Siguiente
         </Button>
         <Button className='btn-refresh' variant="contained" color="primary" onClick={handleRefresh}>
